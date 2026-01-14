@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import list from "./assets/list.json"
 
-  return (
-    <>
-      <p>Hello</p>
-    </>
-  )
+function App() {
+    const [album, loadAlbum] = useState("Press the button")
+
+	function generateAlbum(){
+		const randomIndex = Math.floor(Math.random() * list.length);
+		loadAlbum(list[randomIndex])
+	}
+
+    return (
+      <>
+        <p>{album}</p>
+		<button onClick={generateAlbum}>Generate</button>
+      </>
+    )
 }
 
 export default App
