@@ -1,4 +1,19 @@
+:root {
+  --bg-color: #0F0F12;
+  --surface-color: #1E1E24;
+  --text-primary: #E1E1E6;
+  --text-secondary: #A0A0AB;
+  --accent-color: #BB86FC;
+  --success-color: #03DAC6;
+  --error-color: #CF6679; /* For critical errors or negative reviews */
+}
+
 html{
-    background-color: #2C2C2C;
-    color: #E4E4E4
+    background-color: var(--bg-color);
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+
+    color: var(--text-primary);
 }
