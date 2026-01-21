@@ -51,6 +51,7 @@
     display: none;
 }
 
+
 button{
     color: var(--text-primary);
     background-color: var(--surface-color);

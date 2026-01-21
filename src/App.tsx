@@ -6,7 +6,6 @@ import list from "./assets/list.json"
 import placeholderImg from "./assets/placeholder.png"
 import missingArt from "./assets/missingArt.png"
 
-
 function App() {
 	const [EntryHistory, setEntryHistory] = useState(localStorage.getItem('entries'));
     const [AlbumData, loadAlbumData] = useState([null,null, null , null])
@@ -56,6 +55,20 @@ function App() {
 		}
 
 		// Check if list is empty
+		var entryArray:Array<Object>= [];
+		if(EntryHistory==null){
+			localStorage.setItem('entries', '[]');
+			setEntryHistory('[]');
+		}
+
+		// Add entry to list
+		entryArray = JSON.parse(localStorage.getItem('entries'));
+		entryArray.push(albumEntry);
+
+		//Update storage
+		var entryArrayString: string = JSON.stringify(entryArray);
+		setEntryHistory(entryArrayString);
+		localStorage.setItem('entries', entryArrayString);
 
 		setButtonDivCSS("buttonDiv");
 		setRateDivCSS("rateDiv disable");
