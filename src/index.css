@@ -6,6 +6,7 @@
   --accent-color: #BB86FC;
   --success-color: #03DAC6;
   --error-color: #CF6679; /* For critical errors or negative reviews */
+  --rating-color: #F5F749;
 }
 
 html{

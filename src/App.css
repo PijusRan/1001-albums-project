@@ -23,13 +23,30 @@
 
 .buttonDiv{
     width: 100%;
+    margin-top: 25px;
+
 
     display: flex;
     justify-content: space-around;
 }
 .rateDiv{
     width: 100%;
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
 }
+.ratingStars{
+    height: 40px;
+    align-items: center;
+}
+.ratingStars > label > span > svg{
+    
+    fill: var(--rating-color);
+}
+
 .disable{
     display: none;
 }
@@ -40,5 +57,4 @@ button{
 
     width: 40%;
     height: 40px;
-    margin-top: 25px;
-}
+}1
