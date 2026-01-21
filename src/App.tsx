@@ -8,8 +8,8 @@ import missingArt from "./assets/missingArt.png"
 
 function App() {
 	const [EntryHistory, setEntryHistory] = useState(localStorage.getItem('entries'));
-    const [AlbumData, loadAlbumData] = useState([null,null, null , null])
-	const [headerString, loadHeader] = useState("Press \"Generate\" to begin.")
+    const [AlbumData, loadAlbumData] = useState([null, "", "Press \"Generate\" to begin." , null])
+	const [headerString, loadHeader] = useState()
 	const [albumImg, loadCoverImg] = useState(placeholderImg)
 	const [buttonDivCSS, setButtonDivCSS] = useState("buttonDiv");
 	const [rateButtonCSS, setRateButtonCSS] = useState("rateButton disable");
@@ -19,8 +19,6 @@ function App() {
 	async function generateAlbum(){
 		//Pick random album
 		const randomIndex = Math.floor(Math.random() * list.length);
-		loadHeader(list[randomIndex]);
-
 		let album:Array<string> | null;
 		album = list[randomIndex].match(/^(.*?)\s*-\s*(.*?)\s*\((.*?)\)$/);
 		loadAlbumData(album);
@@ -30,9 +28,11 @@ function App() {
 		console.log(dbResponse);
 		const dbJSON = await dbResponse.json();
 		
-		//Load cover
+		//Load cover AND TITLE
 		if(dbJSON.album) loadCoverImg(dbJSON.album[0].strAlbumThumb)
 		else loadCoverImg(missingArt);
+		loadHeader(album[0]);
+
 
 		//Enable rating
 		setRateButtonCSS("rateButton");
@@ -77,15 +77,17 @@ function App() {
     return (
       <>
 	  	<section className='albumSection'>
-			<h2 className='albumHeader'>{headerString}</h2>
 			<img src={albumImg} className="albumImg"/>
+			<h1 className='albumTitle'>{`${AlbumData[2]} (${AlbumData[3]}`}) </h1>
+			<h2 className='albumArtist'>{AlbumData[1]}</h2>
+
 			<div className={buttonDivCSS}>
-				<button onClick={generateAlbum} className='genButton'>GENERATE</button>
-				<button onClick={rateFunction} className={rateButtonCSS}>RATE</button>
+				<button onClick={generateAlbum} className='genButton'>Generate</button>
+				<button onClick={rateFunction} className={rateButtonCSS}>Rate</button>
 			</div>
 			<div className={rateDivCSS}>
 				<Rating size='large' onChange={changedStars} value={ratingValue} className='ratingStars'/>
-				<button onClick={doneRating}>SUBMIT</button>
+				<button onClick={doneRating} className='saveButton'>Save</button>
 			</div>
 
 		</section>
