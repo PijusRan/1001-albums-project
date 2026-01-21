@@ -1,0 +1,103 @@
+.albumSection{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--surface-color);
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5%;
+}
+
+.albumTitle{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+.albumArtist{
+    width: 100%;
+    text-align: left;
+    margin-top: 0;
+
+    font-weight: normal;
+}
+
+/* === BUTTONS === */
+
+.buttonDiv{
+    width: 100%;
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    border: 2px solid var(--text-primary);
+    
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+.genButton{
+    width: 60%;
+    height: 3rem;
+}
+.rateButton{
+    width: 30%;
+    height: 3rem;
+}
+.saveButton{
+    width: 30%;
+    height: 3rem;
+}
+
+.rateDiv{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+}
+.ratingStars{
+    height: 40px;
+    align-items: center;
+}
+.ratingStars > label > span > svg{
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    fill: var(--rating-color);
+}
+
+.disable{
+    display: none;
+}
+
+
+
+@media (orientation: landscape) {
+    .albumSection{
+        max-height: 80vh;
+        max-width: 90vw;    
+    }
+    .albumImg{
+        max-width: 50vh;
+    }
+}
+
+@media (orientation: portrait) {
+    .albumSection{
+        width: 80vw;    
+        max-height: 90vh;
+    }
+    .albumImg{
+        max-width: 75vw;
+        max-height: 50vh;
+    }
+}
