@@ -78,7 +78,7 @@ function App() {
       <>
 	  	<section className='albumSection'>
 			<img src={albumImg} className="albumImg"/>
-			<h1 className='albumTitle'>{`${AlbumData[2]} (${AlbumData[3]}`}) </h1>
+			<h1 className='albumTitle'>{`${AlbumData[2]} ` + (AlbumData[3] ? `(${AlbumData[3]})` : '')} </h1>
 			<h2 className='albumArtist'>{AlbumData[1]}</h2>
 
 			<div className={buttonDivCSS}>

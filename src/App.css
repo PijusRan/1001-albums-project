@@ -4,8 +4,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    height: 80vh;
-    max-width: 90vw;
     background-color: var(--surface-color);
     border-radius: 25px;
 
@@ -26,11 +24,6 @@
     margin-top: 0;
 
     font-weight: normal;
-}
-
-.albumImg{
-    width: 100%;
-    max-width: 50vh;
 }
 
 /* === BUTTONS === */
@@ -85,3 +78,24 @@ button{
 }
 
 
+
+@media (orientation: landscape) {
+    .albumSection{
+        max-height: 80vh;
+        max-width: 90vw;    
+    }
+    .albumImg{
+        max-width: 50vh;
+    }
+}
+
+@media (orientation: portrait) {
+    .albumSection{
+        width: 80vw;    
+        max-height: 90vh;
+    }
+    .albumImg{
+        max-width: 75vw;
+        max-height: 50vh;
+    }
+}
