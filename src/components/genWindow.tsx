@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Rating } from '@mui/material'
+import "./genWindow.css"
 
 import list from "../assets/list.json"
 import placeholderImg from "../assets/placeholder.png"
@@ -55,7 +56,7 @@ export default function genWindow(props){
 		var entryArray:Array<Object>= [];
 		if(props.entryHistory==null){
 			localStorage.setItem('entries', '[]');
-			props.setEntryHistory('[]');
+			props.setEntryHistory([]);
 		}
 
 		// Add entry to list
@@ -63,9 +64,8 @@ export default function genWindow(props){
 		entryArray.push(albumEntry);
 
 		//Update storage
-		var entryArrayString: string = JSON.stringify(entryArray);
-		props.setEntryHistory(entryArrayString);
-		localStorage.setItem('entries', entryArrayString);
+		props.setEntryHistory(entryArray);
+		localStorage.setItem('entries', JSON.stringify(entryArray));
 
 		setButtonDivCSS("buttonDiv");
 		setRateDivCSS("rateDiv disable");
