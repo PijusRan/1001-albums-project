@@ -1,9 +1,4 @@
 .albumSection{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     background-color: var(--surface-color);
     border-radius: 25px;
 
@@ -74,7 +69,6 @@ button{
     height: 2.5rem !important;
     fill: var(--rating-color);
 }
-
 .disable{
     display: none;
 }
@@ -84,10 +78,11 @@ button{
 @media (orientation: landscape) {
     .albumSection{
         max-height: 80vh;
-        max-width: 90vw;    
+        max-width: 40vw;
     }
     .albumImg{
-        max-width: 50vh;
+        max-width: 100%;
+        max-height: 50vh;
     }
 }
 
