@@ -1,9 +1,7 @@
 .histSection{
-    align-self: stretch;
-
     background-color: var(--surface-color);
     border-radius: 25px;
-    padding: 3%;
+    padding: 25px;
 
     display: flex;
     flex-direction: column;
@@ -12,6 +10,8 @@
 .histFigure{
     width: 100%;
     margin: 0;
+
+    overflow-y: scroll;
 }
 
 .entryItem{
@@ -26,12 +26,6 @@
 
 @media (orientation: landscape) {
     .histSection{
-        width: 30vw;
-    }
-}
-
-@media (orientation: portrait) {
-    .histSection{
-        width: 80vw;    
+        max-width: 40vw;    
     }
 }

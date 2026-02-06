@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import { Rating } from '@mui/material'
 import "./genWindow.css"
 
@@ -8,7 +8,7 @@ import missingArt from "../assets/missingArt.png"
 
 
 
-export default function genWindow(props){
+const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
     const [AlbumData, loadAlbumData] = useState([null, "", "Press \"Generate\" to begin." , null])
 	const [albumImg, loadCoverImg] = useState(placeholderImg)
 	const [buttonDivCSS, setButtonDivCSS] = useState("buttonDiv");
@@ -72,7 +72,7 @@ export default function genWindow(props){
 	}
 
     return (
-        <section className='albumSection'>
+        <section ref={ref} className='albumSection'>
             <img src={albumImg} className="albumImg"/>
             <h1 className='albumTitle'>{`${AlbumData[2]} ` + (AlbumData[3] ? `(${AlbumData[3]})` : '')} </h1>
             <h2 className='albumArtist'>{AlbumData[1]}</h2>
@@ -87,4 +87,6 @@ export default function genWindow(props){
             </div>
         </section>
     )
-}
+});
+
+export default GenWindow;

@@ -1,5 +1,7 @@
+import { forwardRef } from "react";
 import { Rating } from '@mui/material'
 import "./histWindow.css"
+
 
 interface EntryType {
     albumImage: string;
@@ -7,9 +9,9 @@ interface EntryType {
     rating: number;
 }
 
-export default function histWindow(props : any){
+const HistWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
     return(
-        <section className='histSection'>
+        <section ref={ref} className='histSection'>
             <h2>Listening History</h2>
             <figure className='histFigure'>
                 {(props.entryHistory) ? (props.entryHistory).map((entry : EntryType, id : number) => {return(
@@ -25,4 +27,6 @@ export default function histWindow(props : any){
             </figure>
 		</section>
     )
-}
+});
+
+export default HistWindow;
