@@ -1,0 +1,37 @@
+.histSection{
+    align-self: stretch;
+
+    background-color: var(--surface-color);
+    border-radius: 25px;
+    padding: 3%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.histFigure{
+    width: 100%;
+    margin: 0;
+}
+
+.entryItem{
+    display: grid;
+    grid-template-columns: 3rem auto;
+    column-gap: 1rem;
+    align-items: center;
+}
+.entryItem > img{
+    width: 3rem;
+}
+
+@media (orientation: landscape) {
+    .histSection{
+        width: 30vw;
+    }
+}
+
+@media (orientation: portrait) {
+    .histSection{
+        width: 80vw;    
+    }
+}
