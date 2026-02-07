@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import Grainient from './assets/Grainient';
 import './App.css'
 
 import GenWindow from './components/genWindow.tsx';
@@ -17,9 +18,17 @@ function App() {
 		observer.observe(sourceRef.current);
 		return () => observer.disconnect();
 	}, []);
+
+	
     
 	return(
 		<main>
+			<Grainient
+				color1="#0F0F12"
+				color2= "#03DAC6"
+				color3="#B19EEF"
+			/>
+
 			<GenWindow ref={sourceRef} entryHistory={EntryHistory} setEntryHistory={setEntryHistory}/>
 			<HistWindow  ref={targetRef} entryHistory={EntryHistory} setEntryHistory={setEntryHistory}/>
 		</main>

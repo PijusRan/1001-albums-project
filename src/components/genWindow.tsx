@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react'
+import { useState, forwardRef, useRef } from 'react'
 import { Rating } from '@mui/material'
 import "./genWindow.css"
 
@@ -15,7 +15,8 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 	const [rateButtonCSS, setRateButtonCSS] = useState("rateButton disable");
 	const [rateDivCSS, setRateDivCSS] = useState("rateDiv disable");
 	const [ratingValue, setRatingVal] = useState(0);
-	
+	const albumImgRef = useRef(null);
+
 	async function generateAlbum(){
 		//Pick random album
 		const randomIndex = Math.floor(Math.random() * list.length);
@@ -73,7 +74,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 
     return (
         <section ref={ref} className='albumSection'>
-            <img src={albumImg} className="albumImg"/>
+            <img src={albumImg}  ref={albumImgRef} className="albumImg"/>
             <h1 className='albumTitle'>{`${AlbumData[2]} ` + (AlbumData[3] ? `(${AlbumData[3]})` : '')} </h1>
             <h2 className='albumArtist'>{AlbumData[1]}</h2>
 
