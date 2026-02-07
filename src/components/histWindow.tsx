@@ -20,7 +20,7 @@ const HistWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
                         <p>
                             {entry.albumString}
                             <br/>
-                            <Rating defaultValue={entry.rating} readOnly/>
+                            <Rating value={entry.rating} readOnly/>
                         </p>
                     </figcaption>
                 )}) : <></>}

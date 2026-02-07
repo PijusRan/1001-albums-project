@@ -20,10 +20,20 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 	async function generateAlbum(){
 		//Pick random album
 		const randomIndex = Math.floor(Math.random() * list.length);
+
+		//Check if album has been reviewed already
+		let history = props.entryHistory;
+		const exists = history.find(entry => entry.albumString === list[randomIndex]);
+		if(exists){
+			generateAlbum();
+			return;
+		}
+
+		//Create album preview
 		let album:Array<string> | null;
 		album = list[randomIndex].match(/^(.*?)\s*-\s*(.*?)\s*\((.*?)\)$/);
 		loadAlbumData(album);
-		
+
 		//Find cover
 		const dbResponse = await fetch(`https://www.theaudiodb.com/api/v1/json/123/searchalbum.php?s=${album[1]}&a=${album[2]}`);
 		console.log(dbResponse);
