@@ -14,7 +14,7 @@ const HistWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
         <section ref={ref} className='histSection'>
             <h2>Listening History</h2>
             <figure className='histFigure'>
-                {(props.entryHistory) ? (props.entryHistory).map((entry : EntryType, id : number) => {return(
+                {(props.entryHistory) ? (props.entryHistory.slice().reverse()).map((entry : EntryType, id : number) => {return(
                     <figcaption className="entryItem" key={id}>
                         <img src={entry.albumImage}/>
                         <p>

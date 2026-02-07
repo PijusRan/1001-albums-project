@@ -1,12 +1,13 @@
 :root {
   --bg-color: #0F0F12;
-  --surface-color: #1E1E24;
+  --surface-color: #1E1E2499;
   --text-primary: #E1E1E6;
   --text-secondary: #A0A0AB;
   --accent-color: #BB86FC;
   --success-color: #03DAC6;
   --error-color: #CF6679; /* For critical errors or negative reviews */
   --rating-color: #F5F749;
+  --border-color: #E1E1E688;
 }
 
 html{
