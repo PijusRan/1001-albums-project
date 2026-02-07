@@ -1,5 +1,5 @@
-import { forwardRef } from "react";
 import { Rating } from '@mui/material'
+import { motion } from "motion/react"
 import "./histWindow.css"
 
 
@@ -9,24 +9,27 @@ interface EntryType {
     rating: number;
 }
 
-const HistWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
+export default function HistWindow(props){
     return(
-        <section ref={ref} className='histSection'>
+        <motion.section className='histSection' layout transition={{ duration: 3, ease: "easeOut"}} initial={{height: 0}} animate={{height: props.sectionH}}>
             <h2>Listening History</h2>
             <figure className='histFigure'>
                 {(props.entryHistory) ? (props.entryHistory.slice().reverse()).map((entry : EntryType, id : number) => {return(
-                    <figcaption className="entryItem" key={id}>
+                    <motion.figcaption className="entryItem" key={id}
+                     initial={{ opacity: 0 }}
+                     whileInView={{ opacity: 1 }}
+                     exit={{opacity: 0}}
+                    >
+
                         <img src={entry.albumImage}/>
                         <p>
                             {entry.albumString}
                             <br/>
                             <Rating value={entry.rating} readOnly/>
                         </p>
-                    </figcaption>
+                    </motion.figcaption>
                 )}) : <></>}
             </figure>
-		</section>
+		</motion.section>
     )
-});
-
-export default HistWindow;
+}

@@ -1,5 +1,6 @@
 import { useState, forwardRef, useRef } from 'react'
 import { Rating } from '@mui/material'
+import { AnimatePresence, motion, translateAxis } from "motion/react"
 import "./genWindow.css"
 
 import list from "../assets/list.json"
@@ -10,7 +11,9 @@ import missingArt from "../assets/missingArt.png"
 
 const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
     const [AlbumData, loadAlbumData] = useState([null, "", "Press \"Generate\" to begin." , null])
+	const [titleOpacity, setTitleOpacity] = useState(100);
 	const [albumImg, loadCoverImg] = useState(placeholderImg)
+	const [rotation, setRotation] = useState(0);
 	const [buttonDivCSS, setButtonDivCSS] = useState("buttonDiv");
 	const [rateButtonCSS, setRateButtonCSS] = useState("rateButton disable");
 	const [rateDivCSS, setRateDivCSS] = useState("rateDiv disable");
@@ -32,7 +35,6 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		//Create album preview
 		let album:Array<string> | null;
 		album = list[randomIndex].match(/^(.*?)\s*-\s*(.*?)\s*\((.*?)\)$/);
-		loadAlbumData(album);
 
 		//Find cover
 		const dbResponse = await fetch(`https://www.theaudiodb.com/api/v1/json/123/searchalbum.php?s=${album[1]}&a=${album[2]}`);
@@ -40,9 +42,20 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		const dbJSON = await dbResponse.json();
 		
 		//Load cover AND TITLE
-		if(dbJSON.album) loadCoverImg(dbJSON.album[0].strAlbumThumb)
-		else loadCoverImg(missingArt);
 
+		// Rotate 90 degrees
+		setRotation(90);
+		setTitleOpacity(0);
+		
+		// Change image at the midpoint of the rotation
+		setTimeout(() => {
+			if(dbJSON.album) loadCoverImg(dbJSON.album[0].strAlbumThumb)
+			else loadCoverImg(missingArt);
+
+			loadAlbumData(album);
+			setTitleOpacity(100);
+		}, 1000); // Half of the 300ms animation duration
+		
 		//Enable rating
 		setRateButtonCSS("rateButton");
 	}
@@ -83,10 +96,22 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 	}
 
     return (
-        <section ref={ref} className='albumSection'>
-            <img src={albumImg}  ref={albumImgRef} className="albumImg"/>
-            <h1 className='albumTitle'>{`${AlbumData[2]} ` + (AlbumData[3] ? `(${AlbumData[3]})` : '')} </h1>
-            <h2 className='albumArtist'>{AlbumData[1]}</h2>
+        <motion.section ref={ref} className='albumSection' layout transition={{ duration: 5}}>
+			<motion.img src={albumImg}  ref={albumImgRef} className="albumImg"
+			animate={{ rotateY: rotation }}
+        	transition={{ duration: 1, ease: "easeOut"}}
+			onLoad={() => setRotation(0)}
+			/>
+            
+            <motion.h1 className='albumTitle' 
+				animate={{ opacity: titleOpacity }}
+				transition={{ duration: 1}}
+			>{`${AlbumData[2]} ` + (AlbumData[3] ? `(${AlbumData[3]})` : '')}</motion.h1>
+            
+			<motion.h2 className='albumArtist'
+				animate={{ opacity: titleOpacity }}
+				transition={{ duration: 1}}
+			>{AlbumData[1]}</motion.h2>
 
             <div className={buttonDivCSS}>
                 <button onClick={generateAlbum} className='genButton'>Generate</button>
@@ -96,7 +121,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
                 <Rating size='large' onChange={changedStars} value={ratingValue} className='ratingStars'/>
                 <button onClick={doneRating} className='saveButton'>Save</button>
             </div>
-        </section>
+        </motion.section>
     )
 });
 
