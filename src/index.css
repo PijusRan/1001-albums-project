@@ -19,3 +19,8 @@ html{
 
     color: var(--text-primary);
 }
+
+h2{
+  font-weight: 500;
+  margin-top: 0%;
+}

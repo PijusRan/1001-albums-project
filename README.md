@@ -28,6 +28,7 @@ This is a website with the purpose of browsing the famous list. It was created b
 - **React.js**: The framework of the app.
 - **Typescript**: The programming language.
 - **Vite**: The powerhouse of the app.
+- **Framer Motion**: Cool animations.
 
 ## 📖 Sources and external API's
 
