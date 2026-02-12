@@ -96,7 +96,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 	}
 
     return (
-        <motion.section ref={ref} className='albumSection' layout transition={{ duration: 5}}>
+        <motion.section ref={ref} className='albumSection' layout transition={{ duration: 3, ease: "easeOut"}}>
 			<motion.img src={albumImg}  ref={albumImgRef} className="albumImg"
 			animate={{ rotateY: rotation }}
         	transition={{ duration: 1, ease: "easeOut"}}

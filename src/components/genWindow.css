@@ -95,7 +95,7 @@ button{
         max-height: 90vh;
     }
     .albumImg{
-        max-width: 75vw;
+        width: 50vw;
         max-height: 50vh;
     }
 }

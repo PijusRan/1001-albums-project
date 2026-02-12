@@ -23,6 +23,7 @@ function App() {
     
 	return(
 		<main>
+			
 			<Grainient
 				color1="#0F0F12"
 				color2= "#03DAC6"

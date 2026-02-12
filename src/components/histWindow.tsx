@@ -16,9 +16,11 @@ export default function HistWindow(props){
             <figure className='histFigure'>
                 {(props.entryHistory) ? (props.entryHistory.slice().reverse()).map((entry : EntryType, id : number) => {return(
                     <motion.figcaption className="entryItem" key={id}
+                     transition={{duration: 0.5}}
                      initial={{ opacity: 0 }}
                      whileInView={{ opacity: 1 }}
                      exit={{opacity: 0}}
+                     layout
                     >
 
                         <img src={entry.albumImage}/>
