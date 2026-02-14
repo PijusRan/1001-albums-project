@@ -17,6 +17,18 @@
     overflow-y: scroll;
 }
 
+.header{
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+.header > h2{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.header > button{
+    margin: 0.5rem;
+}
+
 .entryItem{
     display: grid;
     grid-template-columns: 3rem auto;
