@@ -114,12 +114,25 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 			>{AlbumData[1]}</motion.h2>
 
             <div className={buttonDivCSS}>
-                <button onClick={generateAlbum} className='genButton'>Generate</button>
-                <button onClick={rateFunction} className={rateButtonCSS}>Rate</button>
+                <motion.button 
+					onClick={generateAlbum} className='genButton'
+					whileHover={{backgroundColor:"#2F2F32"}}
+					whileTap={{backgroundColor:"#000000"}}
+				>Generate</motion.button>
+                <motion.button 
+					onClick={rateFunction} className={rateButtonCSS}
+					whileHover={{backgroundColor:"#1F1F22"}}
+					whileTap={{backgroundColor:"#000000"}}
+				>Rate</motion.button>
             </div>
+
             <div className={rateDivCSS}>
                 <Rating size='large' onChange={changedStars} value={ratingValue} className='ratingStars'/>
-                <button onClick={doneRating} className='saveButton'>Save</button>
+                <motion.button 
+					onClick={doneRating} className='saveButton'
+					whileHover={{backgroundColor:"#1F1F22"}}
+					whileTap={{backgroundColor:"#000000"}}
+				>Save</motion.button>
             </div>
         </motion.section>
     )

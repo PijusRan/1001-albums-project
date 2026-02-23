@@ -3,8 +3,47 @@
     top:50%;
     left:50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
+    width: 92vw;
     height: 80vh;
     background-color: var(--surface-color);
     backdrop-filter: blur(10px);
+}
+
+.detailsHeader{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    justify-content: center;
+}
+.detailsHeader > h2{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.detailsHeader > button{
+    padding: 0.5rem;
+    align-self: center;
+    justify-self: end;
+}
+
+.detailsFigure{
+    margin: 0;
+    width: 96%;
+    height: 82%;
+    padding: 2%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 5%;
+    column-gap: 5%;
+}
+
+.detailsEntry{
+    width: 45%;
+
+    display: flex;
+    column-gap: 2%;
+}
+.detailsEntry > img{
+    width: 40%;
+    aspect-ratio: 1/1;
 }

@@ -3,7 +3,7 @@
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     padding: 2rem;
-    border: var(--border-color) 2px solid;
+    border: var(--border-color) 1px solid;
 
     display: flex;
     flex-direction: column;
