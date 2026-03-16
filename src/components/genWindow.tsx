@@ -72,6 +72,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		const albumEntry = {
 			"albumString": AlbumData[0],
 			"albumImage": albumImg,
+
 			"rating": ratingValue,
 			"date": new Date().toISOString().split('T')[0]
 		}

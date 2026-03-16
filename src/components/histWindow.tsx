@@ -20,7 +20,7 @@ export default function HistWindow(props){
 					onClick={props.openDetails} className='saveButton'
 					whileHover={{backgroundColor:"#1F1F22"}}
 					whileTap={{backgroundColor:"#000000"}}
-				>Show more</motion.button>
+				>Details</motion.button>
             </div>
             
 
