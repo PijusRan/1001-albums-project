@@ -13,15 +13,17 @@ This is a website with the purpose of browsing the famous list. It was created b
 - **🔐 Local data management:** The ratings are safely stored in local memory, no database.
 - **📱 Responsive Design:** Access on any device with adaptive design.
 
+## 🎯 Roadmap
 
-## 🎯 Feature Roadmap
-
- 1. A sophisticated listening history
- 2. Hosting
- 3. A themed interface
- 4. A backend server
- 5. Online account options
- 6. Integration into streaming services
+ - [ ] A sophisticated listening history
+ - [ ] Hosting
+ - [ ] Full album list
+ - [x] A themed interface
+ - [ ] A backend server
+ - [ ] Online account options
+ - [ ] Integration into streaming services
+ - [ ] Code cleanup / reusable components
+ - [ ] Next album preloading
 
 ## 👩‍💻 Tech Stack and References
 

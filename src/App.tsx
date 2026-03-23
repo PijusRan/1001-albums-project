@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import Grainient from './assets/Grainient';
+import Grainient from './assets/Grainient.tsx';
 import './App.css'
 
 import GenWindow from './components/genWindow.tsx';

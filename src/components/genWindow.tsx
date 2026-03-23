@@ -1,81 +1,66 @@
-import { useState, forwardRef, useRef } from 'react'
+// Libraries
+import { useState, forwardRef } from 'react'
 import { Rating } from '@mui/material'
-import { AnimatePresence, motion, translateAxis } from "motion/react"
+import { motion } from "motion/react"
 import "./genWindow.css"
 
-import list from "../assets/list.json"
+// Subcomponents
+import type Album from "./subcomponents/albumInterface"
+import getRandomAlbum from './subcomponents/randomAlbum'
+import Button from './subcomponents/button'
+
+// Assets
 import placeholderImg from "../assets/placeholder.png"
-import missingArt from "../assets/missingArt.png"
-
-
 
 const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
-    const [AlbumData, loadAlbumData] = useState([null, "", "Press \"Generate\" to begin." , null])
+
+	// --- STATES ---
+    const [AlbumData, loadAlbumData] : [Partial<Album>, Function]= useState(
+		{title: "",
+		 artist: "Press \"Generate\" to begin.",
+		 year: ""}
+	);
 	const [titleOpacity, setTitleOpacity] = useState(100);
 	const [albumImg, loadCoverImg] = useState(placeholderImg)
 	const [rotation, setRotation] = useState(0);
-	const [buttonDivCSS, setButtonDivCSS] = useState("buttonDiv");
-	const [rateButtonCSS, setRateButtonCSS] = useState("rateButton disable");
-	const [rateDivCSS, setRateDivCSS] = useState("rateDiv disable");
+	const [rateEnabled, setRateEnabled] = useState(false);
 	const [ratingValue, setRatingVal] = useState(0);
-	const albumImgRef = useRef(null);
+	const [ratePressed, setRatePressed] = useState(false);
+
+	// --- METHODS ---
+	const delay = (ms : number) => new Promise(resolve => setTimeout(resolve, ms));
 
 	async function generateAlbum(){
-		//Pick random album
-		const randomIndex = Math.floor(Math.random() * list.length);
-
-		//Check if album has been reviewed already
-		let history = props.entryHistory;
-		const exists = history.find(entry => entry.albumString === list[randomIndex]);
-		if(exists){
-			generateAlbum();
-			return;
-		}
-
-		//Create album preview
-		let album:Array<string> | null;
-		album = list[randomIndex].match(/^(.*?)\s*-\s*(.*?)\s*\((.*?)\)$/);
-
-		//Find cover
-		const dbResponse = await fetch(`https://www.theaudiodb.com/api/v1/json/123/searchalbum.php?s=${album[1]}&a=${album[2]}`);
-		console.log(dbResponse);
-		const dbJSON = await dbResponse.json();
-		
-		//Load cover AND TITLE
-
 		// Rotate 90 degrees
 		setRotation(90);
 		setTitleOpacity(0);
+		await delay(1000);
 		
 		// Change image at the midpoint of the rotation
-		setTimeout(() => {
-			if(dbJSON.album) loadCoverImg(dbJSON.album[0].strAlbumThumb)
-			else loadCoverImg(missingArt);
-
-			loadAlbumData(album);
-			setTitleOpacity(100);
-		}, 1000); // Half of the 300ms animation duration
+		await loadAlbumData(await getRandomAlbum());
+		loadCoverImg(AlbumData.coverURL ?? placeholderImg);
+		await delay(1000);
+		
+		// Turn back
+		setTitleOpacity(100);
+		setRotation(0);
 		
 		//Enable rating
-		setRateButtonCSS("rateButton");
+		setRateEnabled(true);
 	}
 
-	function rateFunction(){
-		setButtonDivCSS("buttonDiv disable");
-		setRateDivCSS("rateDiv");
-	}
-	function changedStars(event: React.SyntheticEvent, value: number | null){
+	function changedStars(event: React.SyntheticEvent, value: number){
 		setRatingVal(value);
 	}
+
 	function doneRating(){
 		// Creates entry
-		const albumEntry = {
-			"albumString": AlbumData[0],
-			"albumImage": albumImg,
-
-			"rating": ratingValue,
-			"date": new Date().toISOString().split('T')[0]
-		}
+		loadAlbumData({
+			...AlbumData,
+			rating: ratingValue,
+			date: new Date().toISOString().split('T')[0]
+		})
+		
 
 		// Check if list is empty
 		var entryArray:Array<Object>= [];
@@ -85,56 +70,56 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		}
 
 		// Add entry to list
-		entryArray = JSON.parse(localStorage.getItem('entries'));
-		entryArray.push(albumEntry);
+		entryArray = JSON.parse(localStorage.getItem('entries') ?? "[]");
+		entryArray.push(AlbumData);
 
 		//Update storage
 		props.setEntryHistory(entryArray);
 		localStorage.setItem('entries', JSON.stringify(entryArray));
 
-		setButtonDivCSS("buttonDiv");
-		setRateDivCSS("rateDiv disable");
+		// Return menu
+		setRatePressed(false);
 	}
 
     return (
         <motion.section ref={ref} className='albumSection' layout transition={{ duration: 3, ease: "easeOut"}}>
-			<motion.img src={albumImg}  ref={albumImgRef} className="albumImg"
-			animate={{ rotateY: rotation }}
-        	transition={{ duration: 1, ease: "easeOut"}}
-			onLoad={() => setRotation(0)}
+			<motion.img 
+				src={albumImg} 
+				className="albumImg"
+				animate={{ rotateY: rotation }}
+				transition={{ duration: 1, ease: "easeOut"}}
+				onLoad={() => setRotation(0)}
 			/>
             
-            <motion.h1 className='albumTitle' 
+            <motion.h1
+				className='albumTitle' 
 				animate={{ opacity: titleOpacity }}
 				transition={{ duration: 1}}
-			>{`${AlbumData[2]} ` + (AlbumData[3] ? `(${AlbumData[3]})` : '')}</motion.h1>
+			>
+				{`${AlbumData.title} ` + (AlbumData.year ? `(${AlbumData.year})` : '')}
+			</motion.h1>
             
-			<motion.h2 className='albumArtist'
+			<motion.h2 
+				className='albumArtist'
 				animate={{ opacity: titleOpacity }}
 				transition={{ duration: 1}}
-			>{AlbumData[1]}</motion.h2>
+			>
+				{AlbumData.artist}
+			</motion.h2>
 
-            <div className={buttonDivCSS}>
-                <motion.button 
-					onClick={generateAlbum} className='genButton'
-					whileHover={{backgroundColor:"#2F2F32"}}
-					whileTap={{backgroundColor:"#000000"}}
-				>Generate</motion.button>
-                <motion.button 
-					onClick={rateFunction} className={rateButtonCSS}
-					whileHover={{backgroundColor:"#1F1F22"}}
-					whileTap={{backgroundColor:"#000000"}}
-				>Rate</motion.button>
-            </div>
-
-            <div className={rateDivCSS}>
-                <Rating size='large' onChange={changedStars} value={ratingValue} className='ratingStars'/>
-                <motion.button 
-					onClick={doneRating} className='saveButton'
-					whileHover={{backgroundColor:"#1F1F22"}}
-					whileTap={{backgroundColor:"#000000"}}
-				>Save</motion.button>
-            </div>
+			{
+				ratePressed
+				?
+				<div className="rateDiv">
+					<Rating size='large' onChange={changedStars} value={ratingValue} className='ratingStars'/>
+					<Button text="Save" onClick={doneRating}/>
+				</div>
+				:
+				<div className="buttonDiv">
+					<Button text="Generate" onClick={generateAlbum}/>
+					{rateEnabled && <Button text="Rate" onClick={()=>{ setRatePressed(true) }}/>}
+				</div>
+			}
         </motion.section>
     )
 });

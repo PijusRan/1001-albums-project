@@ -19,7 +19,7 @@
 .albumArtist{
     width: 100%;
     text-align: left;
-    margin-top: 0;
+    margin-bottom: 2rem;
 
     font-weight: normal;
 }
@@ -32,26 +32,14 @@
     display: flex;
     justify-content: space-around;
 }
-button{
-    color: var(--text-primary);
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 0.5rem;
-    
-    font-size: 1.5rem;
-    font-weight: normal;
-}
 .genButton{
     width: 60%;
-    height: 3rem;
 }
 .rateButton{
     width: 30%;
-    height: 3rem;
 }
 .saveButton{
     width: 30%;
-    height: 3rem;
 }
 
 .rateDiv{
@@ -72,11 +60,6 @@ button{
     height: 2.5rem !important;
     fill: var(--rating-color);
 }
-.disable{
-    display: none;
-}
-
-
 
 @media (orientation: landscape) {
     .albumSection{

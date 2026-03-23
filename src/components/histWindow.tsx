@@ -10,8 +10,6 @@ interface EntryType {
 
 
 export default function HistWindow(props){
-    
-
     return(
         <motion.section className='histSection' layout transition={{ duration: 3, ease: "easeOut"}} initial={{height: 0}} animate={{height: props.sectionH}}>
             <div className='header'>
@@ -43,8 +41,6 @@ export default function HistWindow(props){
                     </motion.figcaption>
                 )}) : <></>}
             </figure>
-
-            
 		</motion.section>
     )
 }

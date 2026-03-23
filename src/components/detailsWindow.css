@@ -33,7 +33,7 @@
 .detailsFigure{
     margin: 0;
     width: 94%;
-    height: 75%;
+    height: 70%;
     padding: 2%;
 
     display: flex;
@@ -58,6 +58,15 @@
 }
 .detailsEntry > div > h3{
     font-weight: 400;
+}
+
+.controlsFigure{
+    width: 100%;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (orientation: landscape) {

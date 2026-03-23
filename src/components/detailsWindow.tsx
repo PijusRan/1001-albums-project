@@ -4,6 +4,11 @@ import { motion } from "motion/react"
 import xSVG from "../assets/x.svg"
 
 export default function DetailsWindow(props){
+    function clearHistory(){
+        localStorage.setItem("entries", "[]");
+        window.location.reload();
+    }
+
     return(
         <section className='detailsSection'>
             <figure className="detailsHeader">
@@ -12,8 +17,9 @@ export default function DetailsWindow(props){
                     <img src={xSVG}/>
                 </button>
             </figure>
+
             <figure className="detailsFigure">
-                {props.entryHistory.map((entry, index) => {
+                {props.entryHistory && props.entryHistory.map((entry, index) => {
                     return(
                         <motion.div key={index} className="detailsEntry"
                             transition={{duration: 0.5}}
@@ -29,6 +35,16 @@ export default function DetailsWindow(props){
                         </motion.div>
                     )
                 })}  
+            </figure>
+
+            <figure className="controlsFigure">
+                <motion.button 
+					onClick={clearHistory} className='saveButton'
+					whileHover={{backgroundColor:"#1F1F22"}}
+					whileTap={{backgroundColor:"#000000"}}
+				>
+                    Clear history
+                </motion.button>
             </figure>
         </section>
     )

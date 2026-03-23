@@ -45,6 +45,6 @@
 
 @media (orientation: landscape) {
     .histSection{
-        max-width: 40vw;    
+        width: 30vw;    
     }
 }
