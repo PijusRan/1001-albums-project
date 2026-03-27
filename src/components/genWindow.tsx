@@ -8,6 +8,7 @@ import "./genWindow.css"
 import type Album from "../subcomponents/albumInterface"
 import getRandomAlbum from '../subcomponents/randomAlbum'
 import Button from '../subcomponents/button'
+import Window from '../subcomponents/window'
 
 // Assets
 import placeholderImg from '../assets/placeholder.gif';
@@ -75,7 +76,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 	}
 
     return (
-        <motion.section ref={ref} className='albumSection' layout transition={{ duration: 3, ease: "easeOut"}}>
+        <Window ref={ref} className='albumSection'>
 			
 			<motion.img 
 				src={albumImg} 
@@ -117,7 +118,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 					{rateEnabled && <Button text="Rate" onClick={()=>{ setRatePressed(true) }}/>}
 				</div>
 			}
-        </motion.section>
+        </Window>
     )
 });
 

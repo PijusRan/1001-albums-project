@@ -2,16 +2,18 @@ import "./detailsWindow.css"
 import { Rating } from '@mui/material'
 import { motion } from "motion/react"
 import type Album from "../subcomponents/albumInterface";
-import Button from "../subcomponents/button";
 
-export default function DetailsWindow(props){
+import Button from "../subcomponents/button";
+import Window from "../subcomponents/window"
+
+export default function DetailsWindow(props : any){
     function clearHistory(){
         localStorage.setItem("entries", "[]");
         window.location.reload();
     }
 
     return(
-        <section className='detailsSection'>
+        <Window className='detailsSection'>
             <figure className="detailsHeader">
                 <h1>Details</h1>
                 <Button 
@@ -47,6 +49,6 @@ export default function DetailsWindow(props){
                     text="Clear history"
 				/>
             </figure>
-        </section>
+        </Window>
     )
 }

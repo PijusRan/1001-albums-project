@@ -3,12 +3,16 @@ import { motion } from "motion/react"
 import "./histWindow.css"
 
 import type Album from "../subcomponents/albumInterface"
-
-import placeholderImg from "../assets/placeholder.gif"
+import Window from "../subcomponents/window"
 
 export default function HistWindow(props){
     return(
-        <motion.section className='histSection' layout transition={{ duration: 3, ease: "easeOut"}} initial={{height: 0}} animate={{height: props.sectionH}}>
+        <Window 
+            className='histSection' 
+            animate={{height: props.sectionH, opacity: 1 }}
+            transition={{ height: { duration: 2, ease: "easeOut" }, opacity: { duration: 1 } }}
+            inherit={true}
+        >
             <div className='header'>
                 <h2>Listening History</h2>
                 <motion.button 
@@ -38,6 +42,6 @@ export default function HistWindow(props){
                     </motion.figcaption>
                 )}) : <></>}
             </figure>
-		</motion.section>
+		</Window>
     )
 }
