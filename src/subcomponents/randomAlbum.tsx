@@ -1,6 +1,7 @@
 import type Album from "./albumInterface";
-import list from "../../assets/list.json";
-import missingArt from "../../assets/missingArt.png"
+import list from "../assets/list.json";
+
+import placeholderImg from "../assets/placeholder.gif"
 
 
 export default async function getRandomAlbum() : Promise<Partial<Album>>{
@@ -19,6 +20,6 @@ export default async function getRandomAlbum() : Promise<Partial<Album>>{
         title: formatted[2],
         year: formatted[3],
         genre: dbJSON.album ?  dbJSON.album[0].strGenre : "Unknown Genre",
-        coverURL: dbJSON.album ? dbJSON.album[0].strAlbumThumb : missingArt
+        coverURL: dbJSON.album ? dbJSON.album[0].strAlbumThumb : placeholderImg
     }
 }

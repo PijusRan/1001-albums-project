@@ -24,6 +24,8 @@ This is a website with the purpose of browsing the famous list. It was created b
  - [ ] Integration into streaming services
  - [ ] Code cleanup / reusable components
  - [ ] Next album preloading
+ - [ ] Save last generated song
+ - [ ] Preloading
 
 ## 👩‍💻 Tech Stack and References
 

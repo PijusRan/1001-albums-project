@@ -5,19 +5,19 @@ import { motion } from "motion/react"
 import "./genWindow.css"
 
 // Subcomponents
-import type Album from "./subcomponents/albumInterface"
-import getRandomAlbum from './subcomponents/randomAlbum'
-import Button from './subcomponents/button'
+import type Album from "../subcomponents/albumInterface"
+import getRandomAlbum from '../subcomponents/randomAlbum'
+import Button from '../subcomponents/button'
 
 // Assets
-import placeholderImg from "../assets/placeholder.png"
+import placeholderImg from '../assets/placeholder.gif';
 
 const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 
 	// --- STATES ---
     const [AlbumData, loadAlbumData] : [Partial<Album>, Function]= useState(
-		{title: "",
-		 artist: "Press \"Generate\" to begin.",
+		{title: "Press \"Generate\" to begin.",
+		 artist: "",
 		 year: ""}
 	);
 	const [titleOpacity, setTitleOpacity] = useState(100);
@@ -37,8 +37,9 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		await delay(1000);
 		
 		// Change image at the midpoint of the rotation
-		await loadAlbumData(await getRandomAlbum());
-		loadCoverImg(AlbumData.coverURL ?? placeholderImg);
+		const newAlbum = await getRandomAlbum();
+		loadAlbumData(newAlbum);
+		loadCoverImg(newAlbum.coverURL ?? placeholderImg);
 		await delay(1000);
 		
 		// Turn back
@@ -49,29 +50,21 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		setRateEnabled(true);
 	}
 
-	function changedStars(event: React.SyntheticEvent, value: number){
-		setRatingVal(value);
+	async function changedStars(event: React.SyntheticEvent, value: number){
+		await setRatingVal(value);
 	}
 
 	function doneRating(){
 		// Creates entry
-		loadAlbumData({
+		const completedEntry : Album = {
 			...AlbumData,
 			rating: ratingValue,
-			date: new Date().toISOString().split('T')[0]
-		})
-		
-
-		// Check if list is empty
-		var entryArray:Array<Object>= [];
-		if(props.entryHistory==null){
-			localStorage.setItem('entries', '[]');
-			props.setEntryHistory([]);
-		}
+			dateRated: new Date().toISOString().split('T')[0]
+		};
 
 		// Add entry to list
-		entryArray = JSON.parse(localStorage.getItem('entries') ?? "[]");
-		entryArray.push(AlbumData);
+		let entryArray = JSON.parse(localStorage.getItem('entries') ?? "[]");
+    	entryArray.push(completedEntry);
 
 		//Update storage
 		props.setEntryHistory(entryArray);
@@ -83,29 +76,33 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 
     return (
         <motion.section ref={ref} className='albumSection' layout transition={{ duration: 3, ease: "easeOut"}}>
+			
 			<motion.img 
 				src={albumImg} 
-				className="albumImg"
+				className='albumImg'
 				animate={{ rotateY: rotation }}
 				transition={{ duration: 1, ease: "easeOut"}}
 				onLoad={() => setRotation(0)}
 			/>
+			
+            <div className='albumDataDiv'>
+				<motion.h1
+					className='albumTitle' 
+					animate={{ opacity: titleOpacity }}
+					transition={{ duration: 1}}
+				>
+					{`${AlbumData.title} ` + (AlbumData.year ? `(${AlbumData.year})` : '')}
+				</motion.h1>
+				
+				<motion.h2 
+					className='albumArtist'
+					animate={{ opacity: titleOpacity }}
+					transition={{ duration: 1}}
+				>
+					{AlbumData.artist}
+				</motion.h2>
+			</div>
             
-            <motion.h1
-				className='albumTitle' 
-				animate={{ opacity: titleOpacity }}
-				transition={{ duration: 1}}
-			>
-				{`${AlbumData.title} ` + (AlbumData.year ? `(${AlbumData.year})` : '')}
-			</motion.h1>
-            
-			<motion.h2 
-				className='albumArtist'
-				animate={{ opacity: titleOpacity }}
-				transition={{ duration: 1}}
-			>
-				{AlbumData.artist}
-			</motion.h2>
 
 			{
 				ratePressed

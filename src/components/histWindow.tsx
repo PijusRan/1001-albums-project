@@ -2,12 +2,9 @@ import { Rating } from '@mui/material'
 import { motion } from "motion/react"
 import "./histWindow.css"
 
-interface EntryType {
-    albumImage: string;
-    albumString: string;
-    rating: number;
-}
+import type Album from "../subcomponents/albumInterface"
 
+import placeholderImg from "../assets/placeholder.gif"
 
 export default function HistWindow(props){
     return(
@@ -23,7 +20,7 @@ export default function HistWindow(props){
             
 
             <figure className='histFigure'>
-                {(props.entryHistory) ? (props.entryHistory.slice().reverse()).map((entry : EntryType, id : number) => {return(
+                {(props.entryHistory) ? (props.entryHistory.slice().reverse()).map((album : Album, id : number) => {return(
                     <motion.figcaption className="entryItem" key={id}
                      transition={{duration: 0.5}}
                      initial={{ opacity: 0 }}
@@ -32,11 +29,11 @@ export default function HistWindow(props){
                      layout
                     >
 
-                        <img src={entry.albumImage}/>
+                        <img src={album.coverURL}/>
                         <p>
-                            {entry.albumString}
+                            {album.full}
                             <br/>
-                            <Rating value={entry.rating} readOnly/>
+                            <Rating value={album.rating} readOnly/>
                         </p>
                     </motion.figcaption>
                 )}) : <></>}

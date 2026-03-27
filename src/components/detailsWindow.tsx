@@ -1,7 +1,8 @@
 import "./detailsWindow.css"
 import { Rating } from '@mui/material'
 import { motion } from "motion/react"
-import xSVG from "../assets/x.svg"
+import type Album from "../subcomponents/albumInterface";
+import Button from "../subcomponents/button";
 
 export default function DetailsWindow(props){
     function clearHistory(){
@@ -13,24 +14,27 @@ export default function DetailsWindow(props){
         <section className='detailsSection'>
             <figure className="detailsHeader">
                 <h1>Details</h1>
-                <button onClick={props.closeDetails}>
-                    <img src={xSVG}/>
-                </button>
+                <Button 
+                    onClick={props.closeDetails}
+                    text="X"
+                />
             </figure>
 
             <figure className="detailsFigure">
-                {props.entryHistory && props.entryHistory.map((entry, index) => {
+                {props.entryHistory && props.entryHistory.map((entry : Album, index : number) => {
                     return(
                         <motion.div key={index} className="detailsEntry"
                             transition={{duration: 0.5}}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             exit={{opacity: 0}}>
-                            <img src={entry.albumImage}/>
+                            <img src={entry.coverURL}/>
                             <div>
-                                <h2>{entry.albumString}</h2>
+                                <h2>{entry.full}</h2>
+                                <h3>{entry.genre}</h3>
                                 <Rating value={entry.rating} readOnly/>
-                                <h3>Listened: {entry.date}</h3>
+                                
+                                <h3>Listened: {entry.dateRated}</h3>
                             </div>
                         </motion.div>
                     )
@@ -38,13 +42,10 @@ export default function DetailsWindow(props){
             </figure>
 
             <figure className="controlsFigure">
-                <motion.button 
-					onClick={clearHistory} className='saveButton'
-					whileHover={{backgroundColor:"#1F1F22"}}
-					whileTap={{backgroundColor:"#000000"}}
-				>
-                    Clear history
-                </motion.button>
+                <Button
+					onClick={clearHistory}
+                    text="Clear history"
+				/>
             </figure>
         </section>
     )

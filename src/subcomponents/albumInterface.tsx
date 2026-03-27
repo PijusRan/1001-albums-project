@@ -7,5 +7,5 @@ export default interface Album{
 	coverURL: string;
 
 	rating: number;
-	dateRated: Date;
+	dateRated: string;
 };
