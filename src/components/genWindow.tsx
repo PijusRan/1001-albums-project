@@ -46,6 +46,7 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		
 		//Enable rating
 		setRateEnabled(true);
+		setRatingVal(0);
 	}
 
 	async function renderAlbum(album : Partial<Album>){

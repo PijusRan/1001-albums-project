@@ -1,8 +1,8 @@
 import "./detailsWindow.css"
 import { Rating } from '@mui/material'
 import { motion } from "motion/react"
-import type Album from "../subcomponents/albumInterface";
 
+import type Album from "../subcomponents/albumInterface";
 import Button from "../subcomponents/button";
 import Window from "../subcomponents/window"
 

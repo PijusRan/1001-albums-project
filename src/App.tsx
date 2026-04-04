@@ -7,7 +7,7 @@ import HistWindow from './components/histWindow.tsx';
 import DetailsWindow from './components/detailsWindow.tsx';
 
 function App() {
-	const [EntryHistory, setEntryHistory] = useState(JSON.parse(localStorage.getItem('entries')));
+	const [EntryHistory, setEntryHistory] = useState(JSON.parse(localStorage.getItem('entries') ?? "[]"));
 
 	const sourceRef = useRef<HTMLDivElement>(null);
   	const [histHeight, setHistHeight] = useState(`0`);

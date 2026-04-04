@@ -24,12 +24,13 @@
 
 @media (orientation: portrait) {
     .albumSection{
-        width: 90vw;;
+        width: 90vw;
         max-height: 80vh;
         aspect-ratio: 5/4;
     }
     .albumImg{
-        width: 90%;
+        max-width: 90%;
+        max-height: 50vh;
         aspect-ratio: 1/1
     }
 }

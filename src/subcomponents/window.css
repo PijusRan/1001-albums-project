@@ -3,5 +3,6 @@
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     padding: 2rem;
-    border: var(--border-color) 1px solid;
+    border: 1px solid #FFFFFF14;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
