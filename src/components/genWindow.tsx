@@ -1,5 +1,5 @@
 // Libraries
-import { useState, forwardRef } from 'react'
+import { useState, useEffect, forwardRef } from 'react'
 import { Rating } from '@mui/material'
 import { motion } from "motion/react"
 import "./genWindow.css"
@@ -31,24 +31,37 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 	// --- METHODS ---
 	const delay = (ms : number) => new Promise(resolve => setTimeout(resolve, ms));
 
+	useEffect(() => {
+		let lastAlbum:Partial<Album> = JSON.parse(localStorage.getItem('lastAlbum') ?? "{}");
+		if(lastAlbum.title){
+			renderAlbum(lastAlbum);
+			setRateEnabled(true);
+		}
+  	}, []);
+
 	async function generateAlbum(){
+		const newAlbum = await getRandomAlbum();
+		renderAlbum(newAlbum);
+		localStorage.setItem('lastAlbum', JSON.stringify(newAlbum));
+		
+		//Enable rating
+		setRateEnabled(true);
+	}
+
+	async function renderAlbum(album : Partial<Album>){
 		// Rotate 90 degrees
 		setRotation(90);
 		setTitleOpacity(0);
 		await delay(1000);
 		
 		// Change image at the midpoint of the rotation
-		const newAlbum = await getRandomAlbum();
-		loadAlbumData(newAlbum);
-		loadCoverImg(newAlbum.coverURL ?? placeholderImg);
+		loadAlbumData(album);
+		loadCoverImg(album.coverURL ?? placeholderImg);
 		await delay(1000);
 		
 		// Turn back
 		setTitleOpacity(100);
 		setRotation(0);
-		
-		//Enable rating
-		setRateEnabled(true);
 	}
 
 	async function changedStars(event: React.SyntheticEvent, value: number){

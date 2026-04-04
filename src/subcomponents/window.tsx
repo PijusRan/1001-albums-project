@@ -1,5 +1,6 @@
 import { forwardRef, type ReactNode } from 'react';
 import { motion, type HTMLMotionProps } from 'framer-motion';
+import "./window.css"
 
 // Define the types for your component props
 interface AlbumSectionProps extends HTMLMotionProps<"section"> {
@@ -12,7 +13,7 @@ const Window = forwardRef<HTMLElement, AlbumSectionProps>(
     return (
       <motion.section
         ref={ref}
-        className={`${className}`}
+        className={`window ${className}`}
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

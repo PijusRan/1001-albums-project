@@ -1,10 +1,4 @@
 .histSection{
-    background-color: var(--surface-color);
-    backdrop-filter: blur(10px);
-    border-radius: 1rem;
-    padding: 2rem;
-    border: var(--border-color) 1px solid;
-
     display: flex;
     flex-direction: column;
 }
@@ -46,5 +40,11 @@
 @media (orientation: landscape) {
     .histSection{
         width: 30vw;    
+    }
+}
+
+@media (orientation: portrait) {
+    .histSection{
+        width: 90vw;    
     }
 }

@@ -1,0 +1,7 @@
+.window{
+    background-color: var(--surface-color);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: var(--border-color) 1px solid;
+}

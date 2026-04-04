@@ -1,13 +1,20 @@
-import { motion } from "motion/react"
+import { motion, type HTMLMotionProps } from "motion/react"
 import "./button.css"
 
-export default function Button(props : any){
+interface ButtonProps extends HTMLMotionProps<"button"> {
+  text?: string | null;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export default function Button({ children, className, ...props } : ButtonProps){
     return(
         <motion.button 
             onClick={props.onClick}
             whileHover={{backgroundColor:"#2F2F32"}}
             whileTap={{backgroundColor:"#000000"}}
             layout
+            className={`${className}`}
             transition={{
                 type: "spring",
                 stiffness: 300,   
@@ -17,6 +24,7 @@ export default function Button(props : any){
             }}
         >
             {props.text}
+            {children}
         </motion.button>
     )
     
