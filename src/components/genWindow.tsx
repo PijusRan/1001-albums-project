@@ -65,21 +65,22 @@ const GenWindow = forwardRef<HTMLDivElement, any>((props, ref) =>{
 		setRotation(0);
 	}
 
-	async function changedStars(event: React.SyntheticEvent, value: number){
-		await setRatingVal(value);
+	async function changedStars(_event: React.SyntheticEvent, value: number | null){
+		await setRatingVal(value ?? 0);
 	}
 
 	function doneRating(){
 		// Creates entry
 		const completedEntry : Album = {
-			...AlbumData,
+			...AlbumData!,
+			full: AlbumData.full ?? '',
 			rating: ratingValue,
 			dateRated: new Date().toISOString().split('T')[0]
-		};
+		} as Album;
 
 		// Add entry to list
 		let entryArray = JSON.parse(localStorage.getItem('entries') ?? "[]");
-    	entryArray.push(completedEntry);
+		entryArray.push(completedEntry);
 
 		//Update storage
 		props.setEntryHistory(entryArray);

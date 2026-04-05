@@ -5,7 +5,7 @@ import "./histWindow.css"
 import type Album from "../subcomponents/albumInterface"
 import Window from "../subcomponents/window"
 
-export default function HistWindow(props){
+export default function HistWindow(props : any){
     return(
         <Window 
             className='histSection' 
