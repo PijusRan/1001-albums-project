@@ -5,6 +5,7 @@ import './App.css'
 import GenWindow from './components/genWindow.tsx';
 import HistWindow from './components/histWindow.tsx';
 import DetailsWindow from './components/detailsWindow.tsx';
+import Button from './subcomponents/button.tsx'
 
 function App() {
 	const [EntryHistory, setEntryHistory] = useState(JSON.parse(localStorage.getItem('entries') ?? "[]"));
@@ -41,6 +42,16 @@ function App() {
 			<GenWindow ref={sourceRef} entryHistory={EntryHistory} setEntryHistory={setEntryHistory}/>
 			<HistWindow  sectionH={histHeight} entryHistory={EntryHistory} setEntryHistory={setEntryHistory} openDetails={openDetails}/>
 			{detailsOpen && <DetailsWindow entryHistory={EntryHistory} setEntryHistory={setEntryHistory} closeDetails={closeDetails}/>}
+
+			<a 
+			className='supportButton' 
+			target="_blank"
+   			rel="noreferrer"
+			href='https://buymeacoffee.com/ran0ns'
+			>
+				<Button>🌯 Buy me a kebab</Button>
+			</a>
+			
 		</main>
 	)
 }

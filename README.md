@@ -15,17 +15,16 @@ This is a website with the purpose of browsing the famous list. It was created b
 
 ## 🎯 Roadmap
 
- - [ ] A sophisticated listening history
- - [ ] Hosting
+ - [X] A sophisticated listening history
+ - [X] Hosting
  - [ ] Full album list
  - [x] A themed interface
- - [ ] A backend server
+ - [ ] A backend  server
  - [ ] Online account options
  - [ ] Integration into streaming services
- - [ ] Code cleanup / reusable components
+ - [X] Code cleanup / reusable components
  - [ ] Next album preloading
- - [ ] Save last generated song
- - [ ] Preloading
+ - [X] Save last generated song
 
 ## 👩‍💻 Tech Stack and References
 
