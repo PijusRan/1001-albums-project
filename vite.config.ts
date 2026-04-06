@@ -5,4 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/1001-albums-project/',
   plugins: [react()],
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: false
+  }
 })
